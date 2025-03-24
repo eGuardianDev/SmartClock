@@ -18,7 +18,12 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
   - [ ] Making an order 
 - [ ] Testing parts and finding libraries
   - [ ] Display 
+    - E-Ink no touch 89x38cm - 296x128res [2.9" inch SPI](https://erelement.com/shop/e-ink-2-9-grey/)
   - [ ] Sensors
+    - Microphone [Sound sensor wc](https://erelement.com/shop/sound-sensor-module/)
+    - Enviroment [bme280](https://erelement.com/shop/bme280-ws/)
+    - Hand movement [qtr-md-08a](https://erelement.com/shop/qtr-md-08a/) [pir](https://erelement.com/shop/pir-sensor/)
+    - light [photoresistor](https://elimex.bg/product/70488-fotorezistor-pgm5516-ldr5516)
   - [ ] Actuators
   - [ ] WiFi control 
 - [ ] Simple prototype
@@ -34,3 +39,8 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
   - [ ] Documentation 
   - [ ] Presentation
   - [ ] Video?
+  
+  
+  ### Settings and ideas
+  - There should be different wake up patterns for the alarm. For example - ring 1 second, wait 3-5 seconds, repeat.
+  - Extending the suspend button away, maybe using second ESP with ESP now protocol in deep sleep or unpowered.
