@@ -26,6 +26,7 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
     - light [photoresistor](https://elimex.bg/product/70488-fotorezistor-pgm5516-ldr5516)
   - [ ] Actuators
   - [ ] WiFi control 
+  - [ ]
 - [ ] Simple prototype
   - [ ] WiFi server / API 
   - [ ] Sensor calibration
@@ -40,7 +41,11 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
   - [ ] Presentation
   - [ ] Video?
   
-  
-  ### Settings and ideas
-  - There should be different wake up patterns for the alarm. For example - ring 1 second, wait 3-5 seconds, repeat.
-  - Extending the suspend button away, maybe using second ESP with ESP now protocol in deep sleep or unpowered.
+### Settings and ideas
+ - There should be different wake up patterns for the alarm. For example - ring 1 second, wait 3-5 seconds, repeat.
+ - Extending the suspend button away, maybe using second ESP with ESP now protocol in deep sleep or unpowered.
+ - sync alarm with phone
+
+
+### Diagram
+![Diagram](https://github.com/eGuardianDev/SmartClock/Docs/systemDiagram.drawio.png)
