@@ -12,10 +12,10 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 - Main controller: ESP32
 
 ### Plan of attack
-- [ ] Theoretical idea
-- [ ] Finding & ordering parts
-  - [ ] Finding compatable parts
-  - [ ] Making an order 
+- [X] Theoretical idea
+- [X] Finding & ordering parts
+  - [X] Finding compatable parts
+  - [X] Making an order 
 - [ ] Testing parts and finding libraries
   - [ ] Display 
     - E-Ink no touch 89x38cm - 296x128res [2.9" inch SPI](https://erelement.com/shop/e-ink-2-9-grey/)
@@ -24,12 +24,12 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
     - Enviroment [bme280](https://erelement.com/shop/bme280-ws/)
     - Hand movement [qtr-md-08a](https://erelement.com/shop/qtr-md-08a/) [pir](https://erelement.com/shop/pir-sensor/)
     - light [photoresistor](https://elimex.bg/product/70488-fotorezistor-pgm5516-ldr5516)
+    - SD Card [reader](https://elimex.bg/product/75637-kit-k2162-micro-sd-kartochetets-za-uno)
   - [ ] Actuators
   - [ ] WiFi control 
-  - [ ]
 - [ ] Simple prototype
   - [ ] WiFi server / API 
-  - [ ] Sensor calibration
+  - [ ] Sensor and calibration
   - [ ] Actuators connection
 - [ ] Code finilization
   - [ ] Battery power saving? 
@@ -45,7 +45,7 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
  - There should be different wake up patterns for the alarm. For example - ring 1 second, wait 3-5 seconds, repeat.
  - Extending the suspend button away, maybe using second ESP with ESP now protocol in deep sleep or unpowered.
  - sync alarm with phone
-
+ - Weather forecast
 
 ### Diagram
 ![Diagram](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/SystemDiagram.drawio.png)
