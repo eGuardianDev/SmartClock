@@ -1,35 +1,34 @@
 #include "Logger.hpp"
   
-  
 int Logger::init(){
   if(Serial){
     return 1;
   }
   
-  Serial.begin(9600);
+  Serial.begin(115200);
   return 0;
 }
 
 
-void Logger::debug(char * data){
+void Logger::debug(String data){
   if(DEBUG){
     Serial.print("| DEBUG | ");
     Serial.println(data);
   }
 }
-static void Logger::log(char *data){
+ void Logger::log(String data){
   Serial.print("| Log | ");
   Serial.println(data);
 }
-static void Logger::info(char *data){
+ void Logger::info(String data){
   Serial.print("| Info | ");
   Serial.println(data);
 }
-static void Logger::error(char *data){
+ void Logger::error(String data){
   Serial.print("| Error | ");
   Serial.println(data);
 }
-static void Logger::warning(char *data){
+ void Logger::warning(String data){
   Serial.print("| Warning | ");
   Serial.println(data);
 }

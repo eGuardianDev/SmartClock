@@ -9,11 +9,11 @@ class Logger{
 
 public:
   int init();
-  void debug  (char * data);
-  void log    (char *data[]);
-  void info   (char *data[]);
-  void error  (char *data[]);
-  void warning(char *data[]);
+  void debug  (String data);
+  void log    (String data);
+  void info   (String data);
+  void error  (String data);
+  void warning(String data);
 
 };
 

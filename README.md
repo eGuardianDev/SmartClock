@@ -17,15 +17,15 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
   - [X] Finding compatable parts
   - [X] Making an order 
 - [ ] Testing parts and finding libraries
-  - [ ] Display 
+  - [X] Display 
     - E-Ink no touch 89x38cm - 296x128res [2.9" inch SPI](https://erelement.com/shop/e-ink-2-9-grey/)
-  - [ ] Sensors
+  - [X] Sensors
     - Microphone [Sound sensor wc](https://erelement.com/shop/sound-sensor-module/)
     - Enviroment [bme280](https://erelement.com/shop/bme280-ws/)
     - Hand movement [qtr-md-08a](https://erelement.com/shop/qtr-md-08a/) [pir](https://erelement.com/shop/pir-sensor/)
     - light [photoresistor](https://elimex.bg/product/70488-fotorezistor-pgm5516-ldr5516)
     - SD Card [reader](https://elimex.bg/product/75637-kit-k2162-micro-sd-kartochetets-za-uno)
-  - [ ] Actuators
+  - [ ] ~~Actuators~~
   - [ ] WiFi control 
 - [ ] Simple prototype
   - [ ] WiFi server / API 
@@ -38,6 +38,9 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
   - [ ] Compression of electronics
 - [ ] Presentation material
   - [ ] Documentation 
+    - [ ] CAD design
+    - [ ] Schematics
+    - [ ] Software
   - [ ] Presentation
   - [ ] Video?
   
@@ -49,3 +52,6 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 
 ### Diagram
 ![Diagram](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/SystemDiagram.drawio.png)
+![TechDrawCadBody](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/TechDrawCadBody.png)
+
+![schematiElectronicsSchematicscs](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/ElectronicsSchematics.png)
