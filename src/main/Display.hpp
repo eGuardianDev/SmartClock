@@ -2,6 +2,8 @@
 // using GDEM029T94 128x296, SSD1680, Waveshare 2.9" V2 variant
 #define FullDisplayRefreshDelay 2000 // 2 seconds for full refresh
 
+#include "EnviromentalSensors.hpp"
+
 #define GxEPD2_DISPLAY_CLASS GxEPD2_BW
 
 #define GxEPD2_DRIVER_CLASS GxEPD2_290_T94_V2 // GDEM029T94  128x296, SSD1680, (FPC-7519 rev.b), Waveshare 2.9" V2 variant
@@ -60,6 +62,27 @@ void updateTimePartial(String timeStr) {
   do {
     display.setCursor(10, 115);
     display.print(timeStr);
+  } while (display.nextPage());
+
+
+}
+
+
+void updateTempPartial() {
+  // Define region for partial update (x, y, w, h)
+  display.setPartialWindow(10, 10, 300, 30); 
+  
+  char temperature[10];
+  dtostrf(getTemp(), 5, 2, temperature);
+  char humidity[10];
+  dtostrf(getHumidity(), 5, 2, humidity);
+  char pressure[10];
+  dtostrf(getPressure(), 5, 2, pressure);
+ 
+  display.firstPage();
+  do {
+    display.setCursor(10, 20);  
+    display.print(String("") +temperature + " °C "+ humidity + " % " +pressure + " hPa");
   } while (display.nextPage());
 
 

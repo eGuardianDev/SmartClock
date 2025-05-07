@@ -10,6 +10,7 @@ void setup() {
   setupScreen();
   setupBME();
   setupRTC();
+  setupButtons();
 }
 
 int lastMinute =0;
@@ -30,9 +31,18 @@ void loop() {
   
   if(lastMinute != getMinute()){
     updateTimePartial(currTime);
+    updateTempPartial();
     lastMinute = getMinute();
+    display.hibernate();
   }
   
+  checkForUpdates();
+
+  readLight();
+  logger.log(String("Light level: ") + val_light1 + " | " + val_light2);
   // checkLastUpdate();
+
+  readButton();
+  logger.log(String("Buttons pressed: ") + val_button1 + " | " + val_button2);
   delay(400);
 }
