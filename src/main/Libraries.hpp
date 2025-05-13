@@ -15,7 +15,7 @@
 // select the display class and display driver class in the following file (new style):
 #include <GxEPD2_BW.h>
 #include <Fonts/FreeMonoBold9pt7b.h>
-
+#include <Fonts/FreeMonoBold24pt7b.h>
 
 
 #endif //_Libraries_hpp__

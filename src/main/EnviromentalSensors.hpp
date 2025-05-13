@@ -1,9 +1,7 @@
 #ifndef _EnviromentalSensors_hpp__
 #define _EnviromentalSensors_hpp__
-#define SEALEVELPRESSURE_HPA (1013.25)
 
-#define pin_light1 35
-#define pin_light2 32
+#define SEALEVELPRESSURE_HPA (1013.25)
 
 // ============================
 //  temp and humidity sensors
@@ -52,6 +50,7 @@ float getHumidity(){
 // ============================
 //       light sensors
 // ============================
+
 int val_light1 = 0;
 int val_light2 = 0;
 
@@ -65,15 +64,9 @@ void readLight(){
 }
 
 
-
 // ============================
 //  button press
 // ============================
-
-#define pin_button1 2
-#define pin_button2 15
-#define pin_button1_gnd 33
-#define pin_button2_gnd 32
 
 bool val_button1, val_button2;
 void setupButtons(){
@@ -90,5 +83,26 @@ void readButton(){
   val_button1 = !digitalRead(pin_button1);
   val_button2 = !digitalRead(pin_button2);
 }
+
+
+//================== buzzer ==================
+
+
+void setupBuzzer(){
+  Logger logger;
+  logger.log("Setting buzzer");
+  pinMode(pin_buzzer, OUTPUT);
+}
+
+void testBuzzer(){
+  Logger logger;
+  logger.log("Testing buzzer");
+  for(int i =0; i<32;++i){
+    analogWrite(pin_buzzer, i);
+    delay(5);
+  }
+  analogWrite(pin_buzzer, 0);
+}
+
 
 #endif //_EnviromentalSensors_hpp__

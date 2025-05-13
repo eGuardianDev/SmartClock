@@ -24,10 +24,19 @@ long long lastFullRefresh;
 
 const char HelloWorld[] = "Hello World!";
 
+void setFont24(){
+  display.setFont(&FreeMonoBold24pt7b);
+}
+
+void setFont9(){
+  display.setFont(&FreeMonoBold9pt7b);
+
+}
+
 void helloWorld()
 {
   display.setRotation(1);
-  display.setFont(&FreeMonoBold9pt7b);
+  setFont9();
   display.setTextColor(GxEPD_BLACK);
   int16_t tbx, tby; uint16_t tbw, tbh;
   display.getTextBounds(HelloWorld, 0, 0, &tbx, &tby, &tbw, &tbh);
@@ -55,16 +64,19 @@ void setupScreen()
 }
 
 void updateTimePartial(String timeStr) {
+  setFont24();
+  int x = 296/2-48-24;
+  int y = 128/2 -24 ;
   // Define region for partial update (x, y, w, h)
-  display.setPartialWindow(10, 100, 250, 20); 
+  display.setPartialWindow(x, y, 250, 40); 
 
   display.firstPage();
   do {
-    display.setCursor(10, 115);
+    display.setCursor(x, y+30);
     display.print(timeStr);
   } while (display.nextPage());
 
-
+  setFont9();
 }
 
 

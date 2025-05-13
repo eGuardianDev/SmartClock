@@ -1,3 +1,4 @@
+#include "pins.hpp"
 #include "Logger.hpp"
 #include "Libraries.hpp"
 #include "Display.hpp"
@@ -7,11 +8,22 @@ Logger logger;
 // 
 void setup() {
   logger.init();
+
+
+  setupBuzzer();
+  
+  delay(100);
+  testBuzzer();
+  
+
   setupScreen();
+
   setupBME();
   setupRTC();
   setupButtons();
+  
 }
+
 
 int lastMinute =0;
 void loop() {
@@ -26,7 +38,9 @@ void loop() {
   dtostrf(getHour(), 2, 0, hour);
   dtostrf(getMinute(), 2, 0, minute);
   dtostrf(getSecond(), 2, 0, second);
-  String currTime =  String("Current time: ") + hour +":"+ minute;
+  if(minute[0] == 32) { minute[0] = '0'; }
+  if(hour[0] == 32) { hour[0] = '0'; }
+  String currTime =  String("") + hour +":"+ minute;
   logger.log(currTime);
   
   if(lastMinute != getMinute()){
