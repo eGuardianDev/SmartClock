@@ -72,10 +72,10 @@ bool val_button1, val_button2;
 void setupButtons(){
   pinMode(pin_button1,INPUT_PULLUP);
   pinMode(pin_button2,INPUT_PULLUP);
-  pinMode(pin_button1_gnd,OUTPUT);
-  pinMode(pin_button2_gnd,OUTPUT);
-  digitalWrite(pin_button1_gnd,LOW);
-  digitalWrite(pin_button2_gnd,LOW);
+  // pinMode(pin_button1_gnd,OUTPUT);
+  // pinMode(pin_button2_gnd,OUTPUT);
+  // digitalWrite(pin_button1_gnd,LOW);
+  // digitalWrite(pin_button2_gnd,LOW);
   
 }
 
@@ -97,7 +97,7 @@ void setupBuzzer(){
 void testBuzzer(){
   Logger logger;
   logger.log("Testing buzzer");
-  for(int i =0; i<32;++i){
+  for(int i =180; i<255;++i){
     analogWrite(pin_buzzer, i);
     delay(5);
   }

@@ -1,4 +1,4 @@
-
+#include "RTCModule.hpp"
 // using GDEM029T94 128x296, SSD1680, Waveshare 2.9" V2 variant
 #define FullDisplayRefreshDelay 2000 // 2 seconds for full refresh
 
@@ -22,7 +22,7 @@ GxEPD2_DISPLAY_CLASS<GxEPD2_DRIVER_CLASS, MAX_HEIGHT(GxEPD2_DRIVER_CLASS)> displ
 
 long long lastFullRefresh;
 
-const char HelloWorld[] = "Hello World!";
+// const char HelloWorld[] = "Hello World!";
 
 void setFont24(){
   display.setFont(&FreeMonoBold24pt7b);
@@ -33,13 +33,13 @@ void setFont9(){
 
 }
 
-void helloWorld()
+void printText(String input)
 {
   display.setRotation(1);
   setFont9();
   display.setTextColor(GxEPD_BLACK);
   int16_t tbx, tby; uint16_t tbw, tbh;
-  display.getTextBounds(HelloWorld, 0, 0, &tbx, &tby, &tbw, &tbh);
+  display.getTextBounds(input, 0, 0, &tbx, &tby, &tbw, &tbh);
   // center the bounding box by transposition of the origin:
   uint16_t x = ((display.width() - tbw) / 2) - tbx;
   uint16_t y = ((display.height() - tbh) / 2) - tby;
@@ -49,9 +49,11 @@ void helloWorld()
   {
     display.fillScreen(GxEPD_WHITE);
     display.setCursor(x, y);
-    display.print(HelloWorld);
+    display.print(input);
   }
   while (display.nextPage());
+  display.hibernate();
+
 }
 
 
@@ -59,45 +61,8 @@ void setupScreen()
 {
   lastFullRefresh = millis();
   display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
-  helloWorld();
-  display.hibernate();
-}
-
-void updateTimePartial(String timeStr) {
-  setFont24();
-  int x = 296/2-48-24;
-  int y = 128/2 -24 ;
-  // Define region for partial update (x, y, w, h)
-  display.setPartialWindow(x, y, 250, 40); 
-
-  display.firstPage();
-  do {
-    display.setCursor(x, y+30);
-    display.print(timeStr);
-  } while (display.nextPage());
-
-  setFont9();
-}
-
-
-void updateTempPartial() {
-  // Define region for partial update (x, y, w, h)
-  display.setPartialWindow(10, 10, 300, 30); 
-  
-  char temperature[10];
-  dtostrf(getTemp(), 5, 2, temperature);
-  char humidity[10];
-  dtostrf(getHumidity(), 5, 2, humidity);
-  char pressure[10];
-  dtostrf(getPressure(), 5, 2, pressure);
- 
-  display.firstPage();
-  do {
-    display.setCursor(10, 20);  
-    display.print(String("") +temperature + " °C "+ humidity + " % " +pressure + " hPa");
-  } while (display.nextPage());
-
-
+  printText(String("Starting System..."));
+  delay(100);  
 }
 
 void fullRefresh(){
@@ -108,6 +73,7 @@ void fullRefresh(){
     } while (display.nextPage());
     lastFullRefresh = millis();
 }
+
 void checkLastUpdate(){
 
   if (millis() - lastFullRefresh > 60000) {

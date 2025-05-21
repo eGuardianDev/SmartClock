@@ -17,4 +17,5 @@ public:
 
 };
 
+
 #endif // __Logger_hpp_

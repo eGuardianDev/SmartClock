@@ -1,36 +1,26 @@
 #include "pins.hpp"
 #include "Logger.hpp"
+
+Logger logger;
+
 #include "Libraries.hpp"
 #include "Display.hpp"
 #include "EnviromentalSensors.hpp"
 #include "RTCModule.hpp"
-Logger logger;
-// 
-void setup() {
-  logger.init();
+#include "SerialCommunication.hpp"
+#include "DisplayPages.hpp"
+
+#include "Wifi.hpp"
 
 
-  setupBuzzer();
-  
-  delay(100);
-  testBuzzer();
-  
+#define DebugOn
 
-  setupScreen();
-
-  setupBME();
-  setupRTC();
-  setupButtons();
-  
-}
-
-
-int lastMinute =0;
-void loop() {
-  logger.debug("This is a test!");
+#ifdef DebugOn
+void Debugged(){
+  logger.debug("Debug mode is on!");
   char temp[10];
   dtostrf(getTemp(), 5, 2, temp);
-  logger.log(String("Temp is ") + temp +  " °C"); 
+  logger.debug(String("Temp is ") + temp +  " °C"); 
  
   char hour[4];
   char minute[4];
@@ -38,25 +28,56 @@ void loop() {
   dtostrf(getHour(), 2, 0, hour);
   dtostrf(getMinute(), 2, 0, minute);
   dtostrf(getSecond(), 2, 0, second);
-  if(minute[0] == 32) { minute[0] = '0'; }
-  if(hour[0] == 32) { hour[0] = '0'; }
   String currTime =  String("") + hour +":"+ minute;
-  logger.log(currTime);
+  logger.debug(currTime);
+  logger.debug(String("Current wifi state: ")+ checkWifiConnection());
+ 
+  
+
+  readLight();
+  logger.debug(String("Light level: ") + val_light1 + " | " + val_light2);
+  // checkLastUpdate();
+
+  readButton();
+  logger.debug(String("Buttons pressed: ") + val_button1 + " | " + val_button2);
+}
+#endif
+
+void setup() {
+
+  logger.init();
+  
+  setupBuzzer();
+  delay(10);
+  testBuzzer();
+
+  setupScreen();
+
+  setupBME();
+  
+  setupRTC();
+
+  setupButtons();
+  
+
+  setupWifi();
+}
+
+
+int lastMinute =0;
+void loop() {
+  Logger logger;
   
   if(lastMinute != getMinute()){
-    updateTimePartial(currTime);
-    updateTempPartial();
+    logger.debug("Currently Updatng Minutes");
+    DisplayPage();
     lastMinute = getMinute();
     display.hibernate();
   }
   
-  checkForUpdates();
-
-  readLight();
-  logger.log(String("Light level: ") + val_light1 + " | " + val_light2);
-  // checkLastUpdate();
-
-  readButton();
-  logger.log(String("Buttons pressed: ") + val_button1 + " | " + val_button2);
-  delay(400);
+  SerialRun();
+  Debugged();
+  delay(200);
 }
+
+

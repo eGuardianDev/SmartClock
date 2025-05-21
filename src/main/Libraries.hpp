@@ -18,4 +18,14 @@
 #include <Fonts/FreeMonoBold24pt7b.h>
 
 
+
+// Wifi
+
+#include <WiFiProvisioner.h>
+#include <Preferences.h>
+
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+
 #endif //_Libraries_hpp__
