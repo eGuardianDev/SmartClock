@@ -1,7 +1,13 @@
 #ifndef _Display_Pages_hpp__
 #define _Display_Pages_hpp__
 
-void updateMainPage();
+#include "icons/thunderstorm.hpp"
+#include "icons/snow.hpp"
+
+#include "Weather.hpp"
+
+void displayMainPage();
+void displayWeatherPage();
 
 enum Pages {
   TEST = -1,
@@ -9,30 +15,55 @@ enum Pages {
   WEATHER = 1
 } E_Page = MAIN ; // event page;
 
-void DisplayPage(){
+unsigned const short MAX_PAGES=2; 
+
+void ChangePageLeft(){
+  logger.log("Moved page left. Current page: " + String(E_Page));
+  if(E_Page == 0) return;
+  if(E_Page == WEATHER){
+    E_Page = MAIN;
+  }
+}
+void ChangePageRight(){
+  logger.log("Moved page right. Current page: " + String(E_Page));
+  if(E_Page == MAX_PAGES -1) return;
+  if(E_Page == MAIN){
+    E_Page = WEATHER;
+  }
+}
+
+
+int lastMinute =0;
+
+void DisplayPage(bool check = false){
   Logger logger;
+  if(lastMinute == getMinute() && check){
+    return;
+  }
+  lastMinute = getMinute();
 
   switch(E_Page){
     case TEST:
 
     break;
     case MAIN:
-      updateMainPage();
+      displayMainPage();
     break;
     case WEATHER:
-
+      displayWeatherPage();
     break;
     default:
     logger.error("Invalid page selection variable E_Page. Current selected page is invalid. Changing to default variable");
     E_Page = MAIN;
     break;
   }
+  display.hibernate();
 
 }
 
-void updateMainPage() {
+void displayMainPage() {
   Logger logger;
-  logger.debug("Updateing screen - displaying Main page with time and enviromental data");
+  logger.log("Updateing screen - displaying Main page with time and enviromental data");
 
   display.setPartialWindow(10, 10, 300, 30); 
   
@@ -46,7 +77,7 @@ void updateMainPage() {
   display.firstPage();
   do {
     display.setCursor(10, 20);  
-    display.print(String("") +temperature + " C"+ humidity + " % " +pressure + " hPa");
+    display.print(String("") +temperature + " C "+ humidity + " % " +pressure + " hPa");
   } while (display.nextPage());
 
 
@@ -77,6 +108,45 @@ void updateMainPage() {
   setFont9();
 }
 
+
+void displayWeatherPage(){
+
+  checkWeather();
+
+  logger.log("Updateing screen - displaying weather page");
+  display.setFullWindow();
+  display.firstPage();
+  do
+  {
+    display.fillScreen(GxEPD_WHITE);
+    display.drawBitmap(0, 0, thunderstorm_bmp, 67, 67, GxEPD_BLACK);
+  }
+  while (display.nextPage());
+  delay(2000);
+}
+
+
+void displayBitmapTest(){
+
+  display.firstPage();
+  do
+  {
+    display.fillScreen(GxEPD_WHITE);
+    display.drawBitmap(0, 0, thunderstorm_bmp, 67, 67, GxEPD_BLACK);
+  }
+  while (display.nextPage());
+  display.hibernate();
+  delay(2000);
+  do
+  {
+    display.fillScreen(GxEPD_WHITE);
+    display.drawBitmap(0, 0, snow_bmp, 67, 67, GxEPD_BLACK);
+  }
+  while (display.nextPage());
+  display.hibernate();
+  delay(2000);
+
+}
 
 
 #endif //_Display_Pages_hpp__

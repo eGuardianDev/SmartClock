@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 
-const bool DEBUG = true;
 
 class Logger{
 

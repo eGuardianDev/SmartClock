@@ -4,6 +4,8 @@ A small "smart" alarm clock for IoT course.
 ### Idea
 A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 for data sharing, maybe smart home automation. Different sensors for tracking enviroment data and sleep patterns.  
 
+### Tools
+ - [Bit map to code](https://www.teachmemicro.com/lcd-bitmap-converter-online/)
 
 ### Parts
 - Display: probably E-Ink or 7-segment.

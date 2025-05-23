@@ -1,3 +1,4 @@
+#define DebugOn
 #include "Logger.hpp"
   
 int Logger::init(){
@@ -11,10 +12,12 @@ int Logger::init(){
 
 
 void Logger::debug(String data){
-  if(DEBUG){
-    Serial.print("| DEBUG | ");
-    Serial.println(data);
-  }
+  
+  #ifdef DebugOn
+  Serial.print("| DEBUG | ");
+  Serial.println(data);
+  #endif
+  
 }
  void Logger::log(String data){
   Serial.print("| Log | ");

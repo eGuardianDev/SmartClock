@@ -1,3 +1,6 @@
+#define DebugOn
+
+
 #include "pins.hpp"
 #include "Logger.hpp"
 
@@ -11,13 +14,15 @@ Logger logger;
 #include "DisplayPages.hpp"
 
 #include "Wifi.hpp"
+#include "Weather.hpp"
+
+#include "Logic.hpp"
 
 
-#define DebugOn
 
 #ifdef DebugOn
 void Debugged(){
-  logger.debug("Debug mode is on!");
+  logger.log("Debug mode is on!");
   char temp[10];
   dtostrf(getTemp(), 5, 2, temp);
   logger.debug(String("Temp is ") + temp +  " °C"); 
@@ -34,11 +39,8 @@ void Debugged(){
  
   
 
-  readLight();
   logger.debug(String("Light level: ") + val_light1 + " | " + val_light2);
-  // checkLastUpdate();
 
-  readButton();
   logger.debug(String("Buttons pressed: ") + val_button1 + " | " + val_button2);
 }
 #endif
@@ -53,6 +55,8 @@ void setup() {
 
   setupScreen();
 
+  // displayBitmapTest();
+
   setupBME();
   
   setupRTC();
@@ -61,22 +65,26 @@ void setup() {
   
 
   setupWifi();
+  
+
+  E_State = IDLE;
 }
 
 
-int lastMinute =0;
 void loop() {
   Logger logger;
   
-  if(lastMinute != getMinute()){
-    logger.debug("Currently Updatng Minutes");
-    DisplayPage();
-    lastMinute = getMinute();
-    display.hibernate();
-  }
-  
+  buttonCheck();
   SerialRun();
-  Debugged();
+
+  readButton();
+  readLight();
+
+  DisplayPage(true);
+
+  #ifdef DebugOn
+    Debugged();  
+  #endif
   delay(200);
 }
 
