@@ -2,7 +2,7 @@
 #define _Weather_hpp__
 
 #include "Wifi.hpp"
-
+#include "api.hpp"
 
 
 const String city = "Sofia";

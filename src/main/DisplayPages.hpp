@@ -77,7 +77,7 @@ void displayMainPage() {
   display.firstPage();
   do {
     display.setCursor(10, 20);  
-    display.print(String("") +temperature + " C "+ humidity + " % " +pressure + " hPa");
+    display.print(String("") +temperature + " C\n"+ humidity + " % " +pressure + " hPa");
   } while (display.nextPage());
 
 

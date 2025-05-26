@@ -85,7 +85,7 @@ void loop() {
   #ifdef DebugOn
     Debugged();  
   #endif
-  delay(200);
+  delay(100);
 }
 
 
