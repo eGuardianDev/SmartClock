@@ -67,4 +67,4 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 
 ![schematiElectronicsSchematicscs](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/ElectronicsSchematics.png)
 
-![render](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/render.mp4)
+![render](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/render.gif)
