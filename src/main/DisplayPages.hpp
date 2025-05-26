@@ -65,7 +65,7 @@ void displayMainPage() {
   Logger logger;
   logger.log("Updateing screen - displaying Main page with time and enviromental data");
 
-  display.setPartialWindow(10, 10, 300, 30); 
+  display.setPartialWindow(5, 10, 300, 30); 
   
   char temperature[10];
   dtostrf(getTemp(), 5, 2, temperature);
@@ -74,10 +74,15 @@ void displayMainPage() {
   char pressure[10];
   dtostrf(getPressure(), 5, 2, pressure);
  
+
+  char spaced = '';
+
+  if(humidty[0] == "") { spaced = ' ';}
+
   display.firstPage();
   do {
-    display.setCursor(10, 20);  
-    display.print(String("") +temperature + " C\n"+ humidity + " % " +pressure + " hPa");
+    display.setCursor(5, 20);  
+    display.print(String("") +temperature + " C\n" + spaced+ humidity + " % ");
   } while (display.nextPage());
 
 
