@@ -15,6 +15,9 @@ String jsonBuffer;
 
 String httpGETRequest(const char* serverName);
 
+
+JSONVar weatherObject = JSON.parse(jsonBuffer);
+
 void checkWeather() {
   if(!checkWifiConnection()){
     logger.log("no internet conneciton");
@@ -29,25 +32,12 @@ void checkWeather() {
       
       jsonBuffer = httpGETRequest(serverPath.c_str());
       Serial.println(jsonBuffer);
-      JSONVar myObject = JSON.parse(jsonBuffer);
+      weatherObject = JSON.parse(jsonBuffer);
   
-      if (JSON.typeof(myObject) == "undefined") {
-        Serial.println("Parsing input failed!");
+      if (JSON.typeof(weatherObject) == "undefined") {
+        logger.error("Parsing input failed!");
         return;
       }
-    
-      Serial.print("JSON object = ");
-      Serial.println(myObject);
-      Serial.print("Temperature: ");
-      Serial.println(myObject["main"]["temp"]);
-      Serial.print("Pressure: ");
-      Serial.println(myObject["main"]["pressure"]);
-      Serial.print("Humidity: ");
-      Serial.println(myObject["main"]["humidity"]);
-      Serial.print("Wind Speed: ");
-      Serial.println(myObject["wind"]["speed"]);
-      Serial.print("Current weather: ");
-      Serial.println(myObject["weather"][0]["main"]);
     }
     else {
       Serial.println("WiFi Disconnected");
@@ -56,6 +46,28 @@ void checkWeather() {
   }
 }
 
+
+
+double getWeatherTemp(){
+  return (weatherObject["main"]["temp"]);
+}
+double getWeatherHumidity(){
+  return (weatherObject["main"]["humidity"]);
+}
+String getWeatherType(){
+  return weatherObject["weather"][0]["description"];
+}
+
+double HoldTemp;
+String HoldWeather; 
+bool weatherChanged(){
+  if(HoldTemp != getWeatherTemp() || HoldWeather != getWeatherType() ){
+    HoldTemp = getWeatherTemp();
+    HoldWeather = getWeatherType();
+    return true;
+  }
+  return false;
+}
 String httpGETRequest(const char* serverName) {
   WiFiClient client;
   HTTPClient http;

@@ -13,7 +13,7 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 - Actuators control: attach lights and motor to make waking up easier.
 - Main controller: ESP32
 
-### Plan of attack
+### Plans and ideas
 - [X] Theoretical idea
 - [X] Finding & ordering parts
   - [X] Finding compatable parts
@@ -29,16 +29,16 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
     - ~~SD Card [reader](https://elimex.bg/product/75637-kit-k2162-micro-sd-kartochetets-za-uno)~~
   - [ ] ~~Actuators~~
   - [ ] WiFi control 
-- [ ] Simple prototype
-  - [ ] WiFi server / API 
+- [X] Simple prototype
+  - [X] WiFi server / API 
   - [X] Sensor and calibration
   - [ ] ~~Actuators connection~~
 - [ ] Code
-  - [ ] Initialize everything
+  - [X] Initialize everything
   - [ ] Wifi connection
-  - [ ] Clock logic
+  - [X] Clock logic
   - [ ] API logic 
-    - [ ] Weather 
+    - [X] Weather 
     - [ ] Time sync 
     - [ ] Todo?
   - [ ] sleep tracking
@@ -49,12 +49,33 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
   - [X] Compression of electronics
 - [ ] Presentation material
   - [ ] Documentation 
-    - [ ] CAD design
-    - [ ] Schematics
+    - [X] CAD design
+    - [X] Schematics
     - [ ] Software
   - [ ] Presentation
   - [ ] Video?
   
+### Current progress
+ - [X] fix main page
+ - [X] fix weather page
+ - [ ] enter sleep mode
+ - [ ] add alarm
+ - [ ] test wifi provisioner
+ - [ ] add time sync
+ - [ ] hand move test
+ - [ ] docs
+ - [ ] presentation
+
+### problems met
+ - bitmap size containment
+ - system event configuration
+ - hardware and electronics problem
+ - usb charging
+ - compilation time
+ - interupts not fixed
+ - maybe e-ink wasn't the best idea
+
+
 ### Settings and ideas
  - There should be different wake up patterns for the alarm. For example - ring 1 second, wait 3-5 seconds, repeat.
  - Extending the suspend button away, maybe using second ESP with ESP now protocol in deep sleep or unpowered.
@@ -63,8 +84,12 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 
 ### Diagram
 ![Diagram](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/SystemDiagram.drawio.png)
+
+### Main body CAD design
 ![TechDrawCadBody](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/TechDrawCadBody.png)
 
+### Electronics schematics
 ![schematiElectronicsSchematicscs](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/ElectronicsSchematics.png)
 
+### 3D render of all objects
 ![render](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/render.gif)

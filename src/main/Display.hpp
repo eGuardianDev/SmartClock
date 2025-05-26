@@ -4,6 +4,8 @@
 
 #include "EnviromentalSensors.hpp"
 
+#include "fonts/FreeMonoBold34pt7b.h"
+
 #define GxEPD2_DISPLAY_CLASS GxEPD2_BW
 
 #define GxEPD2_DRIVER_CLASS GxEPD2_290_T94_V2  // GDEM029T94  128x296, SSD1680, (FPC-7519 rev.b), Waveshare 2.9" V2 variant
@@ -30,6 +32,10 @@ void setFont24() {
 
 void setFont9() {
   display.setFont(&FreeMonoBold9pt7b);
+}
+
+void setFont34(){
+  display.setFont(&FreeMonoBold34pt7b);
 }
 
 void printText(String input) {

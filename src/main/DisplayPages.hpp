@@ -1,8 +1,15 @@
 #ifndef _Display_Pages_hpp__
 #define _Display_Pages_hpp__
 
-#include "icons/thunderstorm.hpp"
+#include "icons/clearSky.hpp"
+#include "icons/fewClouds.hpp"
+#include "icons/mist.hpp"
+#include "icons/rain.hpp"
+#include "icons/scatteredClouds.hpp"
+#include "icons/showerRain.hpp"
 #include "icons/snow.hpp"
+#include "icons/thunderstorm.hpp"
+#include "icons/brokenClouds.hpp"
 
 #include "Weather.hpp"
 
@@ -22,6 +29,7 @@ void ChangePageLeft(){
   if(E_Page == 0) return;
   if(E_Page == WEATHER){
     E_Page = MAIN;
+    fullRefresh();
   }
 }
 void ChangePageRight(){
@@ -35,6 +43,7 @@ void ChangePageRight(){
 
 int lastMinute =0;
 
+int currentPage = -1;
 void DisplayPage(bool check = false){
   Logger logger;
   if(lastMinute == getMinute() && check){
@@ -50,13 +59,16 @@ void DisplayPage(bool check = false){
       displayMainPage();
     break;
     case WEATHER:
-      displayWeatherPage();
+      if(weatherChanged() || E_Page != currentPage){
+        displayWeatherPage();
+      }
     break;
     default:
     logger.error("Invalid page selection variable E_Page. Current selected page is invalid. Changing to default variable");
     E_Page = MAIN;
     break;
   }
+  currentPage = E_Page;
   display.hibernate();
 
 }
@@ -65,7 +77,8 @@ void displayMainPage() {
   Logger logger;
   logger.log("Updateing screen - displaying Main page with time and enviromental data");
 
-  display.setPartialWindow(5, 10, 300, 30); 
+  int x1 = 5, y1 =64-24+5;
+  display.setPartialWindow(x1, y1-12, 300, 30); 
   
   char temperature[10];
   dtostrf(getTemp(), 5, 2, temperature);
@@ -75,14 +88,14 @@ void displayMainPage() {
   dtostrf(getPressure(), 5, 2, pressure);
  
 
-  char spaced = '';
+  char spaced = '\0';
 
-  if(humidty[0] == "") { spaced = ' ';}
+  if(humidity[0] == '\0' || humidity[4] == '\0') { spaced = ' ';}
 
   display.firstPage();
   do {
-    display.setCursor(5, 20);  
-    display.print(String("") +temperature + " C\n" + spaced+ humidity + " % ");
+    display.setCursor(x1, y1);  
+    display.print(String("") +temperature + "C\n " + spaced+ humidity + "%");
   } while (display.nextPage());
 
 
@@ -98,15 +111,15 @@ void displayMainPage() {
   String timeStr =  String("") + hour +":"+ minute;
 
 
-  setFont24();
-  int x = 296/2-48-24;
-  int y = 128/2 -24 ;
+  setFont34();
+   int x = 296/2-48-24+12-5;
+   int y = 128/2-36;
   // Define region for partial update (x, y, w, h)
-  display.setPartialWindow(x, y, 250, 40); 
+  display.setPartialWindow(x, y, 260, 60); 
 
   display.firstPage();
   do {
-    display.setCursor(x, y+30);
+    display.setCursor(x, y+45);
     display.print(timeStr);
   } while (display.nextPage());
 
@@ -121,10 +134,47 @@ void displayWeatherPage(){
   logger.log("Updateing screen - displaying weather page");
   display.setFullWindow();
   display.firstPage();
+  int x = 15,y=25;
   do
   {
+    double temp = getWeatherTemp();
+    double humidty =getWeatherHumidity();
+    String type = getWeatherType();
+    logger.log(String("current weather: ") + String(temp) + " " + String(humidty) + " " + type);
     display.fillScreen(GxEPD_WHITE);
-    display.drawBitmap(0, 0, thunderstorm_bmp, 67, 67, GxEPD_BLACK);
+
+      if(type == "clear sky"){
+        display.drawBitmap(x, y, clearSky_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "few clouds"){
+        display.drawBitmap(x, y, fewClouds_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "scattered clouds" ){
+        display.drawBitmap(x, y, scatteredClouds_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "broken clouds" ){
+        display.drawBitmap(x, y, brokenClouds_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "shower rain" ){
+        display.drawBitmap(x, y, showerRain_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "rain"){
+        display.drawBitmap(x, y, rain_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "thunderstorm"){
+        display.drawBitmap(x, y, thunderstorm_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "snow"){
+        display.drawBitmap(x, y, snow_bmp, 67, 67, GxEPD_BLACK);
+      }
+      else if(type == "mist"){
+        display.drawBitmap(x, y, mist_bmp, 67, 67, GxEPD_BLACK);
+      }else{
+        logger.error("Invalid weather type");
+      }
+    
+    display.setCursor(x+67, y+40);
+    display.print(type + " " + (temp-273.1) + "C");
   }
   while (display.nextPage());
   delay(2000);
