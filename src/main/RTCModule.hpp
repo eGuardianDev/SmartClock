@@ -21,6 +21,7 @@ void setupClock(){
   rtc.adjust(DateTime(2000+(int)year,month,date,hour,minute,second));      
 }
 
+
 void setupDate(char inString[20]) {
 
   byte temp1, temp2;
@@ -117,6 +118,10 @@ float getSecond(){
   if(!RTCModuleReady) return 0;
   timeNow = rtc.now();
   return timeNow.second();
+}
+
+void setupClock(int _hour, int _minute){
+  rtc.adjust(DateTime(2000+(int)getYear(),getMonth(),getDay(),_hour,_minute,getSecond()));      
 }
 
 #endif //_RTCModule_hpp__

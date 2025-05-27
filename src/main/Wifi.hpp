@@ -10,7 +10,7 @@ Preferences SettingsEEPROM;
 #define RW_MODE false
 #define RO_MODE true
 
-void setupWifi() {
+bool setupWifi() {
   
   // Define a custom configuration
   WiFiProvisioner::Config customCfg(
@@ -87,7 +87,6 @@ void setupWifi() {
     if(wifiName == ""){
       logger.error("Empty wifi name. Starting Provisioning");
       provisioner.startProvisioning();
-      return;
     }
 
     WiFi.begin(wifiName, wifiPass);
@@ -112,7 +111,7 @@ void setupWifi() {
       delay(500);
     }
 
-
+    return true;
   }
 }
 
@@ -120,5 +119,8 @@ bool checkWifiConnection(){
   return (WiFi.status() == WL_CONNECTED);
 }
 
+bool setup_mDNS(){
+  return MDNS.begin("alarm-clock");
+}
 
 #endif //_WIFI_hpp__

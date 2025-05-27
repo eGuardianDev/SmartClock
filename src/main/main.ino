@@ -15,9 +15,11 @@ Logger logger;
 
 #include "Wifi.hpp"
 #include "Weather.hpp"
+#include "Alarm.hpp"
 
 #include "Logic.hpp"
 
+#include "WebPage.hpp"
 
 
 #ifdef DebugOn
@@ -36,8 +38,8 @@ void Debugged(){
   String currTime =  String("") + hour +":"+ minute;
   logger.debug(currTime);
   logger.debug(String("Current wifi state: ")+ checkWifiConnection());
- 
   
+  logger.debug(WiFi.localIP().toString());
 
   logger.debug(String("Light level: ") + val_light1 + " | " + val_light2);
 
@@ -64,8 +66,14 @@ void setup() {
   setupButtons();
   
 
-  setupWifi();
-  
+
+  if(setupWifi()){
+    setupWebServer();
+    setup_mDNS();
+  }
+
+  setupWeather();
+  setupAlarm();
 
   E_State = IDLE;
 }
@@ -81,6 +89,8 @@ void loop() {
   readLight();
 
   DisplayPage(true);
+  loopServer();
+  checkAlarm();
 
   #ifdef DebugOn
     Debugged();  

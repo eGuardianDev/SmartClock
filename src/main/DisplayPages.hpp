@@ -164,6 +164,9 @@ void displayWeatherPage(){
       else if(type == "thunderstorm"){
         display.drawBitmap(x, y, thunderstorm_bmp, 67, 67, GxEPD_BLACK);
       }
+      else if(type == "light rain"){
+        display.drawBitmap(x, y, showerRain_bmp, 67, 67, GxEPD_BLACK);
+      }
       else if(type == "snow"){
         display.drawBitmap(x, y, snow_bmp, 67, 67, GxEPD_BLACK);
       }
@@ -173,8 +176,10 @@ void displayWeatherPage(){
         logger.error("Invalid weather type");
       }
     
-    display.setCursor(x+67, y+40);
-    display.print(type + " " + (temp-273.1) + "C");
+    display.setCursor(x+80, y+24);
+    display.print(city);
+    display.setCursor(x+70, y+40);
+    display.print(type + " " + (int)round(temp-273) + "C");
   }
   while (display.nextPage());
   delay(2000);

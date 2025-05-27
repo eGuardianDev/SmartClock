@@ -5,8 +5,8 @@
 #include "api.hpp"
 
 
-const String city = "Sofia";
-const String countryCode = "BG";
+String city = "Sofia";
+String countryCode = "BG";
 
 unsigned long lastTime = 0;
 unsigned long timerDelay = 10000;
@@ -15,8 +15,28 @@ String jsonBuffer;
 
 String httpGETRequest(const char* serverName);
 
+Preferences WeatherEEPROM;
 
 JSONVar weatherObject = JSON.parse(jsonBuffer);
+
+void setupWeather(){
+  WeatherEEPROM.begin("infoSettings", RO_MODE);
+
+  if(!WeatherEEPROM.isKey("location")){
+    WeatherEEPROM.end();
+    WeatherEEPROM.begin("infoSettings", RW_MODE);  
+    WeatherEEPROM.putString("location","Sofia");
+    WeatherEEPROM.putString("country","BG");
+  }else{
+    city = WeatherEEPROM.getString("location");
+    countryCode = WeatherEEPROM.getString("country");
+    logger.debug(String("[Weather] location is  ")+ city);
+    logger.debug(String("[Weather] country code is  ")+ countryCode);
+  }
+
+  WeatherEEPROM.end();
+
+}
 
 void checkWeather() {
   if(!checkWifiConnection()){

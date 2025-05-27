@@ -27,6 +27,9 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
+#include <ESPmDNS.h>
+
+// weather api
 #include <Arduino_JSON.h>
 
 
