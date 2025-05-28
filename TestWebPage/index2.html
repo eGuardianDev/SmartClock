@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alarm Clock Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="time"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        label {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Alarm Clock Configuration Settings</h2>
+
+    <form action="/submit">
+        <h4>Location:</h4>
+        <input type="text" name="Location" required>
+
+        <h4>Country:</h4>
+        <input type="text" name="Country" required>
+
+        <input type="submit" value="Send">
+    </form>
+
+    <form action="/submit">
+        <h4>Set Time:</h4>
+        <input type="time" name="Time" required>
+
+        <input type="submit" value="Send">
+    </form>
+
+    <form action="/submit">
+        <h4>Set Alarm Time:</h4>
+        <input type="time" name="Alarm" required>
+        
+        <input type="hidden" name="activeAlarm" value="no">
+        <input type="checkbox" id="activeAlarmCheck" name="activeAlarm"
+               onclick="this.previousElementSibling.disabled = this.checked;">
+        <label for="activeAlarmCheck">Active</label>
+
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>

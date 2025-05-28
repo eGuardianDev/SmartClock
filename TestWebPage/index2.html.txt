@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alarm Clock Configuration</title>
+</head>
+<body>
+    <div style="text-align:center;">
+        <h2>Alarm Clock Configuration Settings</h2>
+
+        <form action="/submit">
+            <h4>Location:</h4>
+            <input type="text" name="Location" required><br><br>
+
+            <h4>Country:</h4>
+            <input type="text" name="Country" required><br><br>
+
+            <input type="submit" value="Send">
+        </form>
+        <br>
+
+        <form action="/submit">
+            <h4>Set Time:</h4>
+            <input type="time" name="Time" required><br><br>
+
+            <input type="submit" value="Send">
+        </form>
+        <br>
+
+        <form action="/submit">
+            <h4>Set Alarm Time:</h4>
+            <input type="time" name="Alarm" required><br><br>
+
+            <input type="hidden" name="activeAlarm" value="no">
+            <input type="checkbox" id="activeAlarmCheck" name="activeAlarm" onclick="this.previousElementSibling.disabled = this.checked;">
+            <label for="activeAlarmCheck">Active</label><br><br>
+
+            <input type="submit" value="Send">
+        </form>
+    </div>
+</body>
+</html>
