@@ -4,6 +4,7 @@
 
 #include "Logger.hpp"
 
+const int MAXATTEMPTSTOCONNECTWIFI = 15;
 
 Preferences SettingsEEPROM;
 
@@ -94,13 +95,13 @@ bool setupWifi() {
     printText(String("Connecting to Wifi..."));
 
     int count = 0;
-    while(WiFi.status() != WL_CONNECTED && count <15) {
+    while(WiFi.status() != WL_CONNECTED && count <MAXATTEMPTSTOCONNECTWIFI) {
       delay(500);
       logger.debug(String("attempting... ") + String(count));
       count++;
     } 
 
-    if(count==10){
+    if(count>=MAXATTEMPTSTOCONNECTWIFI){
       logger.log("Connection timeout. Entering discovery mode.");
       printText(String("No wifi, entering setup..."));
       provisioner.startProvisioning();

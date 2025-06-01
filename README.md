@@ -28,16 +28,16 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
     - light [photoresistor](https://elimex.bg/product/70488-fotorezistor-pgm5516-ldr5516)
     - ~~SD Card [reader](https://elimex.bg/product/75637-kit-k2162-micro-sd-kartochetets-za-uno)~~
   - [ ] ~~Actuators~~
-  - [ ] WiFi control 
+  - [X] WiFi control 
 - [X] Simple prototype
   - [X] WiFi server / API 
   - [X] Sensor and calibration
   - [ ] ~~Actuators connection~~
 - [ ] Code
   - [X] Initialize everything
-  - [ ] Wifi connection
+  - [X] Wifi connection
   - [X] Clock logic
-  - [ ] API logic 
+  - [X] API logic 
     - [X] Weather 
     - [ ] Time sync 
     - [ ] Todo?
@@ -52,19 +52,19 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
     - [X] CAD design
     - [X] Schematics
     - [ ] Software
-  - [ ] Presentation
-  - [ ] Video?
+  - [X] Presentation
+  - [X] Video?
   
 ### Current progress
  - [X] fix main page
  - [X] fix weather page
  - [ ] enter sleep mode
- - [ ] add alarm
- - [ ] test wifi provisioner
+ - [X] add alarm
+ - [X] test wifi provisioner
  - [ ] add time sync
  - [ ] hand move test
  - [ ] docs
- - [ ] presentation
+ - [X] presentation
 
 ### problems met
  - bitmap size containment

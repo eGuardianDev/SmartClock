@@ -152,7 +152,7 @@ void displayWeatherPage(){
       else if(type == "scattered clouds" ){
         display.drawBitmap(x, y, scatteredClouds_bmp, 67, 67, GxEPD_BLACK);
       }
-      else if(type == "broken clouds" ){
+      else if(type == "broken clouds"  || type == "overcast clouds"){
         display.drawBitmap(x, y, brokenClouds_bmp, 67, 67, GxEPD_BLACK);
       }
       else if(type == "shower rain" ){
