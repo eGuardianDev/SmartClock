@@ -1,4 +1,4 @@
-
+  
 // --- lights ---
 #define pin_light1 35  //INPUT
 #define pin_light2 32  //INPUT

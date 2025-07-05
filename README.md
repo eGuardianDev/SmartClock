@@ -91,5 +91,8 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 ### Electronics schematics
 ![schematiElectronicsSchematicscs](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/ElectronicsSchematics.png)
 
+### 3D PCB Design
+![render](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/PCBRender.gif)
+
 ### 3D render of all objects
 ![render](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/render.gif)
