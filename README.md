@@ -2,7 +2,21 @@
 A small "smart" alarm clock for IoT course.
 
 ### Idea
-A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 for data sharing, maybe smart home automation. Different sensors for tracking enviroment data and sleep patterns.  
+A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 for data sharing, maybe smart home automation. Different sensors for tracking enviroment data and sleep patterns.
+
+
+### Restart of project
+ - [ ] Change from arduino ide to platformio
+ - [ ] Refactor RTC functions
+ - [ ] Refactor display functions
+ - [ ] Refactor pages system
+ - [ ] Refactor bme280 sensors
+ - [ ] Add sleep mode
+ - [ ] Fix button design
+ - [ ] Add lights for the display
+
+
+## Documentation
 
 ### Tools
  - [Bit map to code](https://www.teachmemicro.com/lcd-bitmap-converter-online/)
@@ -75,7 +89,6 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
  - interupts not fixed
  - maybe e-ink wasn't the best idea
 
-
 ### Settings and ideas
  - There should be different wake up patterns for the alarm. For example - ring 1 second, wait 3-5 seconds, repeat.
  - Extending the suspend button away, maybe using second ESP with ESP now protocol in deep sleep or unpowered.
@@ -96,3 +109,7 @@ A small clock with alarm and basic functions. Integrationg with WiFi via ESP32 f
 
 ### 3D render of all objects
 ![render](https://github.com/eGuardianDev/SmartClock/blob/main/Docs/render.gif)
+
+---
+
+Created for IoT Course FMI 2025.

@@ -23,8 +23,12 @@ Logger logger;
 
 
 #ifdef DebugOn
+
+
 void Debugged(){
+
   logger.log("Debug mode is on!");
+  
   char temp[10];
   dtostrf(getTemp(), 5, 2, temp);
   logger.debug(String("Temp is ") + temp +  " °C"); 
@@ -35,22 +39,25 @@ void Debugged(){
   dtostrf(getHour(), 2, 0, hour);
   dtostrf(getMinute(), 2, 0, minute);
   dtostrf(getSecond(), 2, 0, second);
-  String currTime =  String("") + hour +":"+ minute;
+  String currTime =  String("") + hour + ":" + minute;
   logger.debug(currTime);
-  logger.debug(String("Current wifi state: ")+ checkWifiConnection());
+  logger.debug(String("Current wifi state: ") + checkWifiConnection());
   
   logger.debug(WiFi.localIP().toString());
 
   logger.debug(String("Light level: ") + val_light1 + " | " + val_light2);
 
   logger.debug(String("Buttons pressed: ") + val_button1 + " | " + val_button2);
+
 }
 #endif
 
 void setup() {
 
+  // =======   setup software ready   ========
   logger.init();
   
+  // ======= setup hardware & sensors ===============
   setupBuzzer();
   delay(10);
   testBuzzer();
@@ -60,18 +67,19 @@ void setup() {
   // displayBitmapTest();
 
   setupBME();
-  
   setupRTC();
 
   setupButtons();
   
-
+  // =====    wifi settings    =======
 
   if(setupWifi()){
     setupWebServer();
     setup_mDNS();
   }
 
+
+  // =======      Apps    ============
   setupWeather();
   setupAlarm();
 
